@@ -3,7 +3,7 @@
 * @Author: raine_v
 * @Date:   2014-05-20 00:48:21
 * @Last Modified by:   vince_000
-* @Last Modified time: 2014-05-20 02:21:17
+* @Last Modified time: 2014-05-21 00:02:16
 *
 * Controller class
 *
@@ -14,8 +14,12 @@
 
 class Controller
 {
-	public $request;
-	public $vars = array();
+	public 	$request;
+	public 	$layout 	= 	'default';
+	private $vars 		= 	array();
+	private $rendered 	= 	false;
+	
+
 
 	function __construct($request) 
 	{
@@ -24,12 +28,24 @@ class Controller
 
 	public function render($view)
 	{	
+		if ($this->rendered)
+		{
+			return false;
+		}
 		extract($this->vars);
-		$view = ROOT.DS.'view'.DS.$this->request->controller.DS.$view.'.php';
+		if (strpos($view, '/')===0)
+		{
+			$view = ROOT.DS.'view'.$view.'.php';
+		}
+		else
+		{
+			$view = ROOT.DS.'view'.DS.$this->request->controller.DS.$view.'.php';
+		}
 		ob_start();
 		require($view);
 		$content_for_layout = ob_get_clean();
-		require ROOT.DS.'view'.DS.'layout'.DS.'default.php';
+		require ROOT.DS.'view'.DS.'layout'.DS.$this->layout.'.php';
+		$this->rendered = true;
 	}
 
 	public function set($key, $value = null)

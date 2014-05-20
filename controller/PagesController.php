@@ -3,7 +3,7 @@
 * @Author: raine_v
 * @Date:   2014-05-20 00:50:44
 * @Last Modified by:   vince_000
-* @Last Modified time: 2014-05-20 02:06:05
+* @Last Modified time: 2014-05-20 23:30:08
 *
 * Pages_Controller class
 *
@@ -15,10 +15,9 @@
 class PagesController extends Controller
 {
 	
-	function view($nom)
+	function index()
 	{
-		$this->set(array('phrase' => 'Salut', 'nom' => 'Vincent')); 	
-		$this->render('index');
+		
 	}
 }
 
