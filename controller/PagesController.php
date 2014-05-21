@@ -19,6 +19,16 @@ class PagesController extends Controller
 	{
 		
 	}
+
+	function contact()
+	{
+		
+	}
+
+	function features()
+	{
+		
+	}
 }
 
 ?>
